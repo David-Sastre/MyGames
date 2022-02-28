@@ -1,12 +1,14 @@
 package com.example.my2048game;
 
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,9 +24,10 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
     private GestureDetector Detector;
     private int score;
     private int i;
-
-
+    private Chronometer mChronometer;
+    private int aux = 0;
     private Button [][] butons= new Button [4][4];
+    private String [][] copia = new String [4][4];
 
 
     private void insertRandom() {
@@ -50,50 +53,81 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
 
 
     private void swipeRight (){
+        boardCopy();
         if (checkRight()) {
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasDcha(i);
                 sumarDerecha(i);
+                winnerChickenDinner();
                 desplazarFilasDcha(i);
             }
             insertRandom();
         }
+        System.out.println("Posicion 0-0" + butons[0][0].getText());
+        System.out.println("Posicion 0-1" +butons[0][1].getText());
+        System.out.println("Posicion 1-0"+butons[1][0].getText());
+        System.out.println("Posicion 0-0" + copia[0][0]);
+        System.out.println("Posicion 0-1" +copia[0][1]);
+        System.out.println("Posicion 1-0"+copia[1][0]);
     }
 
     private void swipeLeft () {
+        boardCopy();
         if (checkLeft()){
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasIzq(i);
                 sumarIzquierda(i);
+                winnerChickenDinner();
                 desplazarFilasIzq(i);
             }
         insertRandom();
         }
+        System.out.println("Posicion 0-0" + butons[0][0].getText());
+        System.out.println("Posicion 0-1" +butons[0][1].getText());
+        System.out.println("Posicion 1-0"+butons[1][0].getText());
+        System.out.println("Posicion 0-0" + copia[0][0]);
+        System.out.println("Posicion 0-1" +copia[0][1]);
+        System.out.println("Posicion 1-0"+copia[1][0]);
     }
 
     private void swipeUp(){
+        boardCopy();
         if (checkUp()) {
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasArriba(i);
                 sumarArriba(i);
+                winnerChickenDinner();
                 desplazarFilasArriba(i);
             }
             insertRandom();
         }
+        System.out.println("Posicion 0-0" + butons[0][0].getText());
+        System.out.println("Posicion 0-1" +butons[0][1].getText());
+        System.out.println("Posicion 1-0"+butons[1][0].getText());
+        System.out.println("Posicion 0-0" + copia[0][0]);
+        System.out.println("Posicion 0-1" +copia[0][1]);
+        System.out.println("Posicion 1-0"+copia[1][0]);
     }
 
     public void swipeDown(){
+        boardCopy();
         if (checkDown()) {
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasAbajo(i);
                 sumarAbajo(i);
                 desplazarFilasAbajo(i);
             }
+            winnerChickenDinner();
             insertRandom();
         }
+        System.out.println("Posicion 0-0" + butons[0][0].getText());
+        System.out.println("Posicion 0-1" +butons[0][1].getText());
+        System.out.println("Posicion 1-0"+butons[1][0].getText());
+        System.out.println("Posicion 0-0" + copia[0][0]);
+        System.out.println("Posicion 0-1" +copia[0][1]);
+        System.out.println("Posicion 1-0"+copia[1][0]);
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     private void changeColor() {
         for (int i=0; i< butons.length; i++){
             for (int j=0; j< butons[0].length; j++) {
@@ -143,7 +177,6 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
                     resString = Integer.toString(resultado);
                     butons[fila][j].setText(resString);
                     score += resultado;
-
                 }
             }
         }
@@ -155,7 +188,6 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
                 if ((butons[fila][j].getText()).equals("") && !(butons[fila][j - 1].getText()).equals("")) {
                     butons[fila][j].setText(butons[fila][j - 1].getText());
                     butons[fila][j - 1].setText("");
-
                 }
             }
         }
@@ -333,17 +365,60 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
         }
     }
 
-
     public void restart(View view) {
         Intent i = new Intent(this,Game1.class);
         startActivity(i);
+        finish();
+    }
+
+    public void boardCopy(){
+        for (int i = 0; i < butons.length; i++) {
+            for (int j = 0; j < butons[0].length; j++) {
+                copia[i][j] = String.valueOf((butons[i][j].getText()));
+            }
+        }
+    }
+
+    public void Undo(View view){
+        for (int i = 0; i < copia.length; i++) {
+            for (int j = 0; j < copia[0].length; j++) {
+                butons[i][j].setText(copia[i][j]);
+            }
+        }
+        changeColor();
+        System.out.println("Posicion 0-0" + butons[0][0].getText());
+        System.out.println("Posicion 0-1" +butons[0][1].getText());
+        System.out.println("Posicion 1-0"+butons[1][0].getText());
+        System.out.println("Posicion 0-0" + copia[0][0]);
+        System.out.println("Posicion 0-1" +copia[0][1]);
+        System.out.println("Posicion 1-0"+copia[1][0]);
+//        bestScore();
+//        gameOver();
+    }
+
+    private void startTimer() {
+        mChronometer.setBase(SystemClock.elapsedRealtime());
+        mChronometer.start();
+    }
+
+    public void winnerChickenDinner() {
+        for (int i = 0; i < butons.length; i++) {
+            for (int j = 0; j < butons[0].length; j++) {
+                if (butons[i][j].getText().equals("2048") && aux==0){
+                    aux++;
+                    Toast.makeText(this, "ENHORABUENA CAMPEÓN", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     public boolean gameOver(){
         if (!checkTablero()){
             if ((!checkRight())&&(!checkLeft())&&(!checkUp())&&(!checkDown())){
+                finish();
                 Intent intent = new Intent(Game1.this, SplashGameOver.class);
                 startActivity(intent);
+                finish();
                 return true;
             }
         } return false;
@@ -354,10 +429,7 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2048game);
         bestScoreText = findViewById(R.id.bestScore);
-        if (savedInstanceState != null) {
-            bestScore = savedInstanceState.getInt(STATE_SCORE);
-            bestScoreText.setText(String.valueOf(bestScore));
-        }
+        mChronometer = findViewById(R.id.chronometer);
         //Iniciamos el GestureDetector
         Detector = new GestureDetector(this, this);
         for (int i = 0; i<butons.length; i++){
@@ -368,15 +440,11 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
             }
         }
         checkTablero();
-        insertRandom();
+        for (int x = 0; x < 2; x++) {
+            insertRandom();
+        }
         changeColor();
-        System.out.println(butons[0].length);
-
-    }
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(STATE_SCORE, bestScore);
-        super.onSaveInstanceState(outState);
+        startTimer();
     }
 
 
@@ -399,20 +467,19 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
 
                 if (Math.abs(ValueX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        checkTablero();
                         swipeRight();
-                        Toast.makeText(this, "Swipe Right", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, "Swipe Right", Toast.LENGTH_SHORT).show();
                     } else {
                         swipeLeft();
-                        Toast.makeText(this, "Swipe Left", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, "Swipe Left", Toast.LENGTH_SHORT).show();
                     }
                 } else if (Math.abs(ValueY) > MIN_DISTANCE) {
                     if (y2 > y1) {
                         swipeDown();
-                        Toast.makeText(this, "Swipe Down", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, "Swipe Down", Toast.LENGTH_SHORT).show();
                     } else {
                         swipeUp();
-                        Toast.makeText(this, "Swipe Up", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, "Swipe Up", Toast.LENGTH_SHORT).show();
                     }
                 }
         }

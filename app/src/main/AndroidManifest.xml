@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.my2048game">
 
     <application
@@ -9,10 +10,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+<!--        <activity-->
+<!--            android:name=".DBHelper"-->
+<!--            android:exported="true" />-->
+        <activity
+            android:name=".Register"
+            android:exported="true" />
+        <activity
+            android:name=".LogIn"
+            android:exported="true" />
         <activity
             android:name=".SplashGameOver"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SplashVictory"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MenuJuegos"
             android:exported="true" />
