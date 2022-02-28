@@ -33,14 +33,14 @@ public class DBHelper extends SQLiteOpenHelper {
             "CREATE TABLE " +
                     TABLE + " (" +
                     KEY_USER + " TEXT PRIMARY KEY, " +
-                    KEY_PASSWORD + "TEXT );";
+                    KEY_PASSWORD + " TEXT );";
 
     private static final String TABLE_SCORE_CREATE =
             "CREATE TABLE " +
                     T_SCORE + " (" +
                     KEY_USER + " TEXT, " +
-                    KEY_TIME + "TEXT, " +
-                    KEY_GAME + "TEXT, " +
+                    KEY_TIME + " TEXT, " +
+                    KEY_GAME + " TEXT, " +
                     KEY_TOTSCORE + " INTEGER );";
 
     private SQLiteDatabase mWritableDB;
