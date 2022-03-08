@@ -75,19 +75,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 tools:ignore="NotSibling" />
-
-            <TextView
-                android:id="@+id/bestScore"
-                android:layout_above="@+id/TxtbestScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/gridFondo"
-                android:text="@string/best"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                tools:ignore="NotSibling" />
         </RelativeLayout>
 
         <LinearLayout

@@ -41,4 +41,8 @@
     <string name="name">Full Name</string>
     <string name="empty_not_saved">Please enter a Username</string>
     <string name="user_used">User already registered</string>
+    <string name="modify_data">MODIFY DATA</string>
+    <string name="user_placeholder">User</string>
+    <string name="timeDetail">Time</string>
+    <string name="score_placeholder">Score</string>
 </resources>

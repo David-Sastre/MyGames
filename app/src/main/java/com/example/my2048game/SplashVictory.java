@@ -24,9 +24,7 @@ public class SplashVictory extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashVictory.this, MenuJuegos.class);
-                startActivity(intent);
-                //finish();
+                finish();
             }
         }, SPLASH_SCREEN);
     }

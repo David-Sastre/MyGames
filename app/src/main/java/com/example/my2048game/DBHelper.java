@@ -1,33 +1,35 @@
 package com.example.my2048game;
 
-import static android.icu.text.MessagePattern.ArgType.SELECT;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Bundle;
 import android.util.Log;
 
+/**
+ *
+ */
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String TAG = DBHelper.class.getSimpleName();
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "GameCenterDB";
+
     //Declaramos variables de la primera tabla "users"
     private static final String TABLE = "Users";
     public static final String KEY_USER = "user";
     public static final String KEY_PASSWORD = "password";
+
     //Declaramos variables de la segunda tablas "scores"
     public static final String T_SCORE = "Scores";
-    public static final String KEY_TOTSCORE = "Total_Score";
+    public static final String KEY_TOTSCORE = "total_Score";
     public static final String KEY_TIME = "time";
-    public static final String KEY_GAME = "Game";
+    public static final String KEY_GAME = "game";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " +
@@ -39,9 +41,9 @@ public class DBHelper extends SQLiteOpenHelper {
             "CREATE TABLE " +
                     T_SCORE + " (" +
                     KEY_USER + " TEXT, " +
-                    KEY_TIME + " TEXT, " +
                     KEY_GAME + " TEXT, " +
-                    KEY_TOTSCORE + " INTEGER );";
+                    KEY_TIME + " TEXT, " +
+                    KEY_TOTSCORE + " TEXT );";
 
     private SQLiteDatabase mWritableDB;
     private SQLiteDatabase mReadableDB;
@@ -65,7 +67,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insert(String user, String password){
+    public long insertPlayer(String user, String password){
         long newId = 0;
         ContentValues values = new ContentValues();
         values.put(KEY_USER, user);
@@ -76,8 +78,28 @@ public class DBHelper extends SQLiteOpenHelper {
             }
             mWritableDB.insert(TABLE, null, values);
         } catch (Exception e) {
-            Log.d(TAG, "INSERT EXCEPTION! " + e.getMessage());
+            Log.d(TAG, "INSERT PLAYER EXCEPTION! " + e.getMessage());
         } return newId;
+    }
+
+    public long insertScore (String user, String game, String time, String total_score ){
+        long newId = 0;
+        String [] args = new String []{user, game, time, total_score};
+        ContentValues values = new ContentValues();
+        values.put(KEY_USER, user);
+        values.put(KEY_GAME, game);
+        values.put(KEY_TIME, time);
+        values.put(KEY_TOTSCORE, total_score);
+        try {
+            if (mWritableDB == null) {
+                mWritableDB = getWritableDatabase();
+            }
+            mWritableDB.insert(T_SCORE, null, values);
+        } catch (Exception e) {
+            Log.d(TAG, "INSERT SCORES EXCEPTION! " + e.getMessage());
+        }
+        return newId;
+
     }
 
     public boolean select(String user, String password){
@@ -97,25 +119,24 @@ public class DBHelper extends SQLiteOpenHelper {
         }catch (Exception e){
             Log.d(TAG, "SEARCH EXCEPTION! " + e);
         }
-
         return false;
     }
-    public int delete(String user) {
-        int deleted = 0;
-        try {
-            if (mWritableDB == null) {
-                mWritableDB = getWritableDatabase();
-            }
-            deleted = mWritableDB.delete(TABLE,
-                    KEY_USER + " = ? ", new String[]{String.valueOf(user)});
+//    public int delete(String user) {
+//        int deleted = 0;
+//        try {
+//            if (mWritableDB == null) {
+//                mWritableDB = getWritableDatabase();
+//            }
+//            deleted = mWritableDB.delete(TABLE,
+//                    KEY_USER + " = ? ", new String[]{String.valueOf(user)});
+//
+//        } catch (Exception e) {
+//            Log.d (TAG, "DELETE EXCEPTION! " + e.getMessage());
+//        }return deleted;
+//    }
 
-        } catch (Exception e) {
-            Log.d (TAG, "DELETE EXCEPTION! " + e.getMessage());
-        }return deleted;
-    }
-
-    public int update(String user, String password){
-        int mNumberOfRowsUpdated = -1;
+    public int updateUser(String user, String password){
+        int updated = 0;
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
@@ -123,13 +144,13 @@ public class DBHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(KEY_USER, user);
             values.put(KEY_PASSWORD, password);
-            mNumberOfRowsUpdated = mWritableDB.update(TABLE,
+            updated = mWritableDB.update(TABLE,
                     values, KEY_USER + " = ?",
-                    new String[]{String.valueOf(user)});
+                    new String[]{user});
 
         } catch (Exception e) {
             Log.d (TAG, "DELETE EXCEPTION! " + e.getMessage());
-        }return mNumberOfRowsUpdated;
+        }return updated;
     }
 
     public Cursor search(String user) {
@@ -149,4 +170,34 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public String [] getScores(String param){
+        //Creamos el cursor
+        Cursor cursor = null;
+        try {
+            if (mReadableDB == null) {
+                mReadableDB = getReadableDatabase();
+            }
+            cursor = mReadableDB.rawQuery("SElECT * FROM Scores", null);
+        } catch (Exception e) {
+            Log.d(TAG, "SEARCH EXCEPTION! " + e);
+        }
+
+        String [] list = new String [cursor.getCount()];
+        if (cursor != null && cursor.getCount()>0) {
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount(); i++) {
+                //Asignamos el valor en nuestras variables para crear un nuevo objeto Comentario
+                String listscore = cursor.getString(cursor.getColumnIndexOrThrow(param));
+                list[i]=listscore;
+                cursor.moveToNext();
+            }
+        }
+        //Cerramos el cursor
+        cursor.close();
+        return list;
+    }
+
+
+
 }

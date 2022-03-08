@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
@@ -23,12 +22,16 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
     private static int MIN_DISTANCE = 100;
     private GestureDetector Detector;
     private int score;
+    private int scorecopy;
     private int i;
     private Chronometer mChronometer;
     private int aux = 0;
     private Button [][] butons= new Button [4][4];
     private String [][] copia = new String [4][4];
 
+    public int getScore() {
+        return score;
+    }
 
     private void insertRandom() {
         if(checkTablero()){
@@ -46,8 +49,8 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
             }
         }
         changeColor();
-        score();
-        bestScore();
+        score(score);
+//        bestScore();
         gameOver();
     }
 
@@ -63,12 +66,6 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
             }
             insertRandom();
         }
-        System.out.println("Posicion 0-0" + butons[0][0].getText());
-        System.out.println("Posicion 0-1" +butons[0][1].getText());
-        System.out.println("Posicion 1-0"+butons[1][0].getText());
-        System.out.println("Posicion 0-0" + copia[0][0]);
-        System.out.println("Posicion 0-1" +copia[0][1]);
-        System.out.println("Posicion 1-0"+copia[1][0]);
     }
 
     private void swipeLeft () {
@@ -82,12 +79,6 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
             }
         insertRandom();
         }
-        System.out.println("Posicion 0-0" + butons[0][0].getText());
-        System.out.println("Posicion 0-1" +butons[0][1].getText());
-        System.out.println("Posicion 1-0"+butons[1][0].getText());
-        System.out.println("Posicion 0-0" + copia[0][0]);
-        System.out.println("Posicion 0-1" +copia[0][1]);
-        System.out.println("Posicion 1-0"+copia[1][0]);
     }
 
     private void swipeUp(){
@@ -101,12 +92,6 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
             }
             insertRandom();
         }
-        System.out.println("Posicion 0-0" + butons[0][0].getText());
-        System.out.println("Posicion 0-1" +butons[0][1].getText());
-        System.out.println("Posicion 1-0"+butons[1][0].getText());
-        System.out.println("Posicion 0-0" + copia[0][0]);
-        System.out.println("Posicion 0-1" +copia[0][1]);
-        System.out.println("Posicion 1-0"+copia[1][0]);
     }
 
     public void swipeDown(){
@@ -120,12 +105,6 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
             winnerChickenDinner();
             insertRandom();
         }
-        System.out.println("Posicion 0-0" + butons[0][0].getText());
-        System.out.println("Posicion 0-1" +butons[0][1].getText());
-        System.out.println("Posicion 1-0"+butons[1][0].getText());
-        System.out.println("Posicion 0-0" + copia[0][0]);
-        System.out.println("Posicion 0-1" +copia[0][1]);
-        System.out.println("Posicion 1-0"+copia[1][0]);
     }
 
     private void changeColor() {
@@ -349,21 +328,21 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
         }return false;
     }
 
-    public void score() {
+    public void score(int score) {
         TextView tv = (TextView) findViewById(R.id.score);
         tv.setText(Integer.toString(score));
     }
 
-    public void bestScore(){
-        if (bestScore == 0){
-            bestScore = score;
-            TextView bs = (TextView) findViewById(R.id.bestScore);
-            bs.setText(Integer.toString(bestScore));
-        } else if (bestScore < score){
-            TextView bs = (TextView) findViewById(R.id.bestScore);
-            bs.setText(Integer.toString(score));
-        }
-    }
+//    public void bestScore(){
+//        if (bestScore == 0){
+//            bestScore = score;
+//            TextView bs = (TextView) findViewById(R.id.bestScore);
+//            bs.setText(Integer.toString(bestScore));
+//        } else if (bestScore < score){
+//            TextView bs = (TextView) findViewById(R.id.bestScore);
+//            bs.setText(Integer.toString(score));
+//        }
+//    }
 
     public void restart(View view) {
         Intent i = new Intent(this,Game1.class);
@@ -372,6 +351,7 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
     }
 
     public void boardCopy(){
+        scorecopy = getScore();
         for (int i = 0; i < butons.length; i++) {
             for (int j = 0; j < butons[0].length; j++) {
                 copia[i][j] = String.valueOf((butons[i][j].getText()));
@@ -380,20 +360,15 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
     }
 
     public void Undo(View view){
+
         for (int i = 0; i < copia.length; i++) {
             for (int j = 0; j < copia[0].length; j++) {
                 butons[i][j].setText(copia[i][j]);
             }
         }
+        score = scorecopy;
+        score(score);
         changeColor();
-        System.out.println("Posicion 0-0" + butons[0][0].getText());
-        System.out.println("Posicion 0-1" +butons[0][1].getText());
-        System.out.println("Posicion 1-0"+butons[1][0].getText());
-        System.out.println("Posicion 0-0" + copia[0][0]);
-        System.out.println("Posicion 0-1" +copia[0][1]);
-        System.out.println("Posicion 1-0"+copia[1][0]);
-//        bestScore();
-//        gameOver();
     }
 
     private void startTimer() {
@@ -428,7 +403,7 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2048game);
-        bestScoreText = findViewById(R.id.bestScore);
+//        bestScoreText = findViewById(R.id.bestScore);
         mChronometer = findViewById(R.id.chronometer);
         //Iniciamos el GestureDetector
         Detector = new GestureDetector(this, this);

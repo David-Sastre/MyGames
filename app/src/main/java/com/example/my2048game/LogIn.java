@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,7 @@ public class LogIn extends AppCompatActivity {
 
     private EditText username;
     private EditText pass;
+    private Boolean visible = false;
     private DBHelper mDB;
 
 
@@ -28,12 +31,28 @@ public class LogIn extends AppCompatActivity {
         mDB = new DBHelper(this);
         this.username= (EditText) findViewById(R.id.editTextTextPersonName);
         this.pass = (EditText) findViewById(R.id.editTextTextPassword);
+        pass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(visible) {
+                        pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        visible = false;
+                        pass.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off_24, 0);
+                    }
+                    else {
+                        pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        visible = true;
+                        pass.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_24, 0);
+                    }
+                }
+            });
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mDB.select(username.getText().toString(), pass.getText().toString())){
                     Intent intent = new Intent(LogIn.this, MenuJuegos.class);
+                    intent.putExtra(DBHelper.KEY_USER, username.getText().toString());
                     startActivity(intent);
                     finish();
                 }
@@ -50,7 +69,6 @@ public class LogIn extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Start empty edit activity.
                 Intent intent = new Intent(getBaseContext(), Register.class);
                 startActivityForResult(intent, 1);
             }
@@ -65,17 +83,7 @@ public class LogIn extends AppCompatActivity {
                 String user = data.getStringExtra(Register.EXTRA_REPLY);
                 String password = data.getStringExtra(Register.EXTRA_REPLY1);
                 if (!TextUtils.isEmpty(user) && (!TextUtils.isEmpty(password))) {
-                    mDB.insert(user, password);
-                } else {
-                    if (TextUtils.isEmpty(user)) {
-                        Toast.makeText(getApplicationContext(),
-                                R.string.empty_not_saved,
-                                Toast.LENGTH_LONG).show();
-                    } else if (TextUtils.isEmpty(password)) {
-                        Toast.makeText(getApplicationContext(),
-                                R.string.empty_not_saved,
-                                Toast.LENGTH_LONG).show();
-                    }
+                    mDB.insertPlayer(user, password);
                 }
             }
         }

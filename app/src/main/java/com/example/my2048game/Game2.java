@@ -20,10 +20,12 @@ import java.util.TimerTask;
 
 public class Game2 extends AppCompatActivity {
 
+    private DBHelper mDB;
     private Chronometer mChronometer;
     public static int HOLE =0, PEG = 1, SELECTED = 3;
     private int casillas = 7;
     private int movimientos = 0;
+    private String totalscore;
     private Button [][] butons = new Button[casillas][casillas];
     private boolean firstClick = true;
     private boolean firstMove = true;
@@ -44,6 +46,7 @@ public class Game2 extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pegsolitaire);
+        mDB = new DBHelper(this);
         contarFichas();
         mChronometer = findViewById(R.id.chronometer);
         for (int i = 0; i<butons.length; i++) {
@@ -86,6 +89,7 @@ public class Game2 extends AppCompatActivity {
                     Intent intent1 = new Intent(Game2.this, SplashGameOver.class);
                     startActivity(intent1);
                 }
+                mDB.insertScore(MenuJuegos.user,"PEG", mChronometer.getText().toString(), totalscore);
                 finish();
             }
 
@@ -288,13 +292,13 @@ public class Game2 extends AppCompatActivity {
 
     public void newScore(){
         long elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
-        int minusTime = (int) ((elapsedMillis/1000)*0.3);
-        int score = (int) (movimientos - minusTime);
-        if (score < 0){
+        int minusTime = (int) ((elapsedMillis/1000)*0.1);
+        int score = (int) (movimientos*5 - minusTime);
+        if ( score< 0){
             score = 0;
         }
         TextView txtscore = (TextView) findViewById(R.id.score);
-        String totalscore = String.valueOf(score);
+        totalscore = String.valueOf(score);
         txtscore.setText(totalscore);
     }
 
@@ -306,7 +310,6 @@ public class Game2 extends AppCompatActivity {
     public void updatePeg(){
         TextView txtpeg = (TextView) findViewById(R.id.Txtpeg);
         txtpeg.setText("Hay " + contarFichas() + " pegs en el tablero.");
-
     }
 }
 

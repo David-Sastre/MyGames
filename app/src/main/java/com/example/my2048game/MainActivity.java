@@ -1,19 +1,14 @@
 package com.example.my2048game;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.motion.widget.OnSwipe;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,19 +44,19 @@ public class MainActivity extends AppCompatActivity {
 // Launch the Help Activity
                 startActivity(new Intent(MainActivity.this,
                         Game2.class));
-            } /*else if (strText.equalsIgnoreCase(getResources().getString(
+            } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_item_settings))) {
 // Launch the Settings Activity
                 startActivity(new Intent(MainActivity.this,
-                        SettingsActivity.class));
+                        Settings.class));
             } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_item_scores))) {
 // Launch the Scores Activity
                 startActivity(new Intent(MainActivity.this,
-                        ScoresActivity.class));
+                        ScoreGames.class));
             }
 
-                 */
+
             }
         });
     }

@@ -33,7 +33,7 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(Splash.this, LogIn.class);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         }, SPLASH_SCREEN);
     }

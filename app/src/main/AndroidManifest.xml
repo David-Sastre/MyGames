@@ -10,9 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-<!--        <activity-->
-<!--            android:name=".DBHelper"-->
-<!--            android:exported="true" />-->
+        <activity
+            android:name=".Settings"
+            android:exported="true" />
+        <activity
+            android:name=".ScoreGames"
+            android:exported="true" />
+        <!-- <activity -->
+        <!-- android:name=".DBHelper" -->
+        <!-- android:exported="true" /> -->
         <activity
             android:name=".Register"
             android:exported="true" />
@@ -47,6 +53,9 @@
             android:exported="false" />
         <activity
             android:name=".Game2"
+            android:exported="false" />
+        <activity
+            android:name=".DetailActivity"
             android:exported="false" />
     </application>
 

@@ -24,9 +24,7 @@ public class SplashGameOver extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashGameOver.this, MenuJuegos.class);
-                startActivity(intent);
-                //finish();
+                finish();
             }
         }, SPLASH_SCREEN);
     }

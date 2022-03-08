@@ -17,21 +17,6 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/PersonName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/name"
-        android:backgroundTint="@color/design_default_color_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <EditText
         android:id="@+id/UserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +29,7 @@
         android:backgroundTint="@color/design_default_color_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/TextPassword"
@@ -57,12 +42,18 @@
         android:inputType="textPassword"
         android:hint="@string/password"
         android:backgroundTint="@color/design_default_color_primary"
+        android:drawableEnd="@drawable/ic_baseline_visibility_off_24"
+        android:paddingRight="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UserName"
         app:layout_constraintVertical_bias="0.0" />
+
     <EditText
         android:id="@+id/TextPassword2"
         android:layout_width="match_parent"
@@ -74,6 +65,11 @@
         android:inputType="textPassword"
         android:hint="@string/password"
         android:backgroundTint="@color/design_default_color_primary"
+        android:drawableEnd="@drawable/ic_baseline_visibility_off_24"
+        android:paddingRight="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -82,7 +78,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/signUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -92,7 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextPassword2"
-        android:onClick="returnReply"/>
+        app:layout_constraintTop_toBottomOf="@+id/TextPassword2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
