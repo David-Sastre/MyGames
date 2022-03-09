@@ -5,276 +5,284 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bckg2048"
+    android:background="@drawable/fondo"
     tools:context=".Game2048">
 
-    <LinearLayout
-        android:id="@+id/LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10sp">
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="150sp"
+        android:layout_height="100sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/buttonsbackground"
+        android:gravity="center"
+        android:text="@string/game1"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/titulo"
-            android:layout_width="150sp"
-            android:layout_height="100sp"
-            android:background="@color/color2048"
-            android:gravity="center"
-            android:text="@string/game1"
-            android:textColor="@color/white"
-            android:textSize="50sp"
+
+
+    <GridLayout
+        android:id="@+id/gridLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:background="@color/design_default_color_on_secondary"
+        android:foregroundGravity="center"
+        android:useDefaultMargins="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restart">
+
+        <Button
+            android:id="@+id/btn00"
+            android:layout_height="80dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="right"
-            android:id="@+id/LinearLayout2">
+        <Button
+            android:id="@+id/btn01"
+            android:layout_height="80sp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/Txtscore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/gridFondo"
-                android:gravity="center"
-                android:text="@string/txt_score"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn02"
+            android:layout_height="80sp"
+            android:layout_row="0"
+            android:layout_column="3"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn03"
+            android:layout_height="80sp"
+            android:layout_row="0"
+            android:layout_column="4"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="right"
-            android:id="@+id/LinearLayout3">
+        <Button
+            android:id="@+id/btn10"
+            android:layout_height="80sp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/Txtscore"
-                android:background="@color/gridFondo"
-                android:gravity="center"
-                android:text="@string/score"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:ignore="NotSibling" />
-        </RelativeLayout>
+        <Button
+            android:id="@+id/btn11"
+            android:layout_height="80sp"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5sp"
-            android:layout_gravity="right"
-            android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn12"
+            android:layout_height="80sp"
+            android:layout_row="1"
+            android:layout_column="3"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <Chronometer
-                android:id="@+id/chronometer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_round"
-                android:gravity="center"
-                android:textSize="24sp"
-                android:textStyle="bold">
-            </Chronometer>
+        <Button
+            android:id="@+id/btn13"
+            android:layout_height="80sp"
+            android:layout_row="1"
+            android:layout_column="4"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/restart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/gridFondo"
-                android:onClick="restart"
-                android:text="Restart"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:ignore="OnClick" />
+        <Button
+            android:id="@+id/btn20"
+            android:layout_height="80sp"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/undo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Undo"
-                android:background="@color/gridFondo"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:onClick="Undo"/>
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn21"
+            android:layout_height="80sp"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <GridLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:background="@color/gridFondo"
-            android:foregroundGravity="center"
-            android:useDefaultMargins="true">
+        <Button
+            android:id="@+id/btn22"
+            android:layout_height="80sp"
+            android:layout_row="2"
+            android:layout_column="3"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn00"
-                android:layout_height="80dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:clickable="false"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+        <Button
+            android:id="@+id/btn23"
+            android:layout_height="80sp"
+            android:layout_row="2"
+            android:layout_column="4"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn01"
-                android:layout_height="80sp"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
+        <Button
+            android:id="@+id/btn30"
+            android:layout_height="80sp"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn02"
-                android:layout_height="80sp"
-                android:layout_row="0"
-                android:layout_column="3"
-                android:clickable="false"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn31"
+            android:layout_height="80sp"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn03"
-                android:layout_height="80sp"
-                android:layout_row="0"
-                android:layout_column="4"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
+        <Button
+            android:id="@+id/btn32"
+            android:layout_height="80sp"
+            android:layout_row="3"
+            android:layout_column="3"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn10"
-                android:layout_height="80sp"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
+        <Button
+            android:id="@+id/btn33"
+            android:layout_height="80sp"
+            android:layout_row="3"
+            android:layout_column="4"
+            android:clickable="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </GridLayout>
 
-            <Button
-                android:id="@+id/btn11"
-                android:layout_height="80sp"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
+    <Button
+        android:id="@+id/undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/buttonsbackground"
+        android:onClick="Undo"
+        android:text="Undo"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo"/>
 
-            <Button
-                android:id="@+id/btn12"
-                android:layout_height="80sp"
-                android:layout_row="1"
-                android:layout_column="3"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
+    <Button
+        android:id="@+id/restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/buttonsbackground"
+        android:onClick="restart"
+        android:text="Restart"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/undo"
+        app:layout_constraintTop_toBottomOf="@+id/titulo"/>
 
-            <Button
-                android:id="@+id/btn13"
-                android:layout_height="80sp"
-                android:layout_row="1"
-                android:layout_column="4"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/buttonsbackground"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/restart"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo"/>
 
-            <Button
-                android:id="@+id/btn20"
-                android:layout_height="80sp"
-                android:layout_row="2"
-                android:layout_column="0"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
+    <TextView
+        android:id="@+id/Txtscore"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/design_default_color_on_secondary"
+        android:gravity="center"
+        android:text="@string/txt_score"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/titulo"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btn21"
-                android:layout_height="80sp"
-                android:layout_row="2"
-                android:layout_column="1"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
-
-            <Button
-                android:id="@+id/btn22"
-                android:layout_height="80sp"
-                android:layout_row="2"
-                android:layout_column="3"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
-
-            <Button
-                android:id="@+id/btn23"
-                android:layout_height="80sp"
-                android:layout_row="2"
-                android:layout_column="4"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
-
-            <Button
-                android:id="@+id/btn30"
-                android:layout_height="80sp"
-                android:layout_row="3"
-                android:layout_column="0"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
-
-            <Button
-                android:id="@+id/btn31"
-                android:layout_height="80sp"
-                android:layout_row="3"
-                android:layout_column="1"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
-
-            <Button
-                android:id="@+id/btn32"
-                android:layout_height="80sp"
-                android:layout_row="3"
-                android:layout_column="3"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
-
-            <Button
-                android:id="@+id/btn33"
-                android:layout_height="80sp"
-                android:layout_row="3"
-                android:layout_column="4"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:clickable="false"/>
-        </GridLayout>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/design_default_color_on_secondary"
+        android:gravity="center"
+        android:text="@string/score"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/titulo"
+        app:layout_constraintTop_toBottomOf="@+id/Txtscore"
+        tools:ignore="NotSibling" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

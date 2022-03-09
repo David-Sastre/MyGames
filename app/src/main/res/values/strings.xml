@@ -45,4 +45,6 @@
     <string name="user_placeholder">User</string>
     <string name="timeDetail">Time</string>
     <string name="score_placeholder">Score</string>
+    <string name="logout">logout</string>
+    <string name="change_password">CHANGE PASSWORD</string>
 </resources>

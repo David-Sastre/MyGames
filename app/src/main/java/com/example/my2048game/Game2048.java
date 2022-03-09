@@ -18,7 +18,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
 
     private DBHelper mDB;
     private int bestScore = 0;
-    TextView tscore;
+    private TextView tscore;
     private float x1, x2, y1, y2;
     private static int MIN_DISTANCE = 100;
     private GestureDetector Detector;
@@ -240,7 +240,6 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         for (int i = butons.length-1; i > 0 ; i--) {
             if ((butons[i][columna].getText()).equals((butons[i-1][columna].getText()))) {
                 if ((butons[i][columna].getText()).equals("") || (butons[i-1][columna].getText().equals(""))) {
-                    System.out.println("No se puede sumar");
                 } else {
                     boton = Integer.parseInt(butons[i][columna].getText().toString());
                     butons[i-1][columna].setText("");
@@ -400,7 +399,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         //Iniciamos el GestureDetector
         Detector = new GestureDetector(this, this);
         for (int i = 0; i<butons.length; i++){
-            for(int j=0; j<butons.length; j++){
+            for(int j=0; j<butons[0].length; j++){
                 String buttonID = "btn" + i +j;
                 int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
                 butons[i][j] = findViewById(resID);
@@ -411,6 +410,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
             insertRandom();
         }
         changeColor();
+        boardCopy();
         startTimer();
     }
 

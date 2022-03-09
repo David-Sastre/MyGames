@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".ChangePassword"
+            android:exported="true" />
+        <activity
             android:name=".MainPegSolitaire"
             android:exported="true" />
         <activity

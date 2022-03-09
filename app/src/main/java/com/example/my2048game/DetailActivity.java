@@ -5,12 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import com.bumptech.glide.Glide;
+
 
 public class DetailActivity extends AppCompatActivity {
     private String user;
@@ -43,6 +41,7 @@ public class DetailActivity extends AppCompatActivity {
         gameScore.setText(game);
         scoreTime.setText(time);
         scoreTotal.setText(score);
+        System.out.println("Puntuación: "+ scoreTotal);
     }
 
     public void delete(View view) {
@@ -96,6 +95,5 @@ public class DetailActivity extends AppCompatActivity {
                     .setTitle("ERROR")
                     .show();
         }
-
     }
 }

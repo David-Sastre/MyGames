@@ -2,13 +2,15 @@ package com.example.my2048game;
 
 
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import androidx.annotation.LongDef;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  *
@@ -58,8 +60,17 @@ public class DBHelper extends SQLiteOpenHelper {
 //        db.execSQL(TABLE_SCORE_CREATE);
         db.execSQL("CREATE TABLE IF NOT EXISTS Scores ( user TEXT, game TEXT, time TEXT, total_Score TEXT, " +
                 " FOREIGN KEY (user) REFERENCES " +
-                "Users (user));");
+                "Users (user) ON DELETE CASCADE);");
         adminDB(db);
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if (!db.isReadOnly()) {
+            // Enable foreign key constraints
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
     }
 
     @Override
@@ -116,7 +127,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean select(String user, String password){
+    public boolean selectUser(String user, String password){
         String [] args = new String[]{user,password};
         try{
             if(mReadableDB == null){
@@ -135,14 +146,14 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return false;
     }
-    public int delete(String user) {
+    public int deleteUser(String user) {
         int deleted = 0;
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
             }
             deleted = mWritableDB.delete(TABLE,
-                    KEY_USER + " = ? ", new String[]{String.valueOf(user)});
+                    KEY_USER + " = ? ", new String[]{(user)});
 
         } catch (Exception e) {
             Log.d (TAG, "DELETE EXCEPTION! " + e.getMessage());
@@ -200,25 +211,25 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public String [] getScores(String param){
+    public String [] getScores(String param) {
         //Creamos el cursor
         Cursor cursor = null;
         try {
             if (mReadableDB == null) {
                 mReadableDB = getReadableDatabase();
             }
-            cursor = mReadableDB.rawQuery("SElECT * FROM Scores", null);
+            cursor = mReadableDB.rawQuery("SElECT * FROM Scores ORDER BY total_score ASC", null);
         } catch (Exception e) {
             Log.d(TAG, "SEARCH EXCEPTION! " + e);
         }
 
-        String [] list = new String [cursor.getCount()];
-        if (cursor != null && cursor.getCount()>0) {
+        String[] list = new String[cursor.getCount()];
+        if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             for (int i = 0; i < cursor.getCount(); i++) {
-                //Asignamos el valor en nuestras variables para crear un nuevo objeto Comentario
+                //Asignamos el valor en nuestras variables para crear un nuevo objeto puntuación
                 String listscore = cursor.getString(cursor.getColumnIndexOrThrow(param));
-                list[i]=listscore;
+                list[i] = listscore;
                 cursor.moveToNext();
             }
         }
@@ -226,7 +237,4 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return list;
     }
-
-
-
 }

@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/drawable/bg_round.xml" value="0.12291666666666666" />
+        <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/drawable/buttonsbackground.xml" value="0.3828125" />
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.3828125" />
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/drawable/ic_twotone_emoji_events_24.xml" value="0.3828125" />
@@ -12,6 +13,8 @@
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/drawable/selected_shape_peg.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/drawable/shape_peg.xml" value="0.3828125" />
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/layout/activity_2048game.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/layout/activity_changa_password.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/layout/activity_change_password.xml" value="0.23233695652173914" />
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/layout/activity_dbhelper.xml" value="0.1" />
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/layout/activity_detail.xml" value="0.25679347826086957" />
         <entry key="..\:/Users/David/AndroidStudioProjects/My2048Game/app/src/main/res/layout/activity_detail2048.xml" value="0.36666666666666664" />

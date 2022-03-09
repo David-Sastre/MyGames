@@ -50,7 +50,7 @@ public class LogIn extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mDB.select(username.getText().toString(), pass.getText().toString())){
+                if (mDB.selectUser(username.getText().toString(), pass.getText().toString())){
                     Intent intent = new Intent(LogIn.this, MenuJuegos.class);
                     intent.putExtra(DBHelper.KEY_USER, username.getText().toString());
                     startActivity(intent);
