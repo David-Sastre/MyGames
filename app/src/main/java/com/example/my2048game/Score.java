@@ -6,15 +6,15 @@ public class Score {
     private String game;
     private String time;
     private String scoreTotal;
-    private final int imageResource;
 
 
-    Score(String username, String game, String time, String scoreTotal, int imageResource) {
+
+    Score(String username, String game, String time, String scoreTotal) {
         this.username = username;
         this.game = game;
         this.time = time;
         this.scoreTotal = scoreTotal;
-        this.imageResource = imageResource;
+
     }
 
     String getUsername() {
@@ -34,7 +34,4 @@ public class Score {
         return scoreTotal;
     }
 
-    public int getImageResource() {
-        return imageResource;
-    }
 }

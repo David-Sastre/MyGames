@@ -26,10 +26,6 @@ public class MenuJuegos extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         user = extras.getString("user");
         AlertDialog.Builder builder = new AlertDialog.Builder (MenuJuegos.this);
-        builder.setMessage("Bienvenido al GAMECENTER " + "\n" + "DISFRUTA DE LOS MEJORES " +
-                        "JUEGOS");
-        builder.setTitle("BIENVENIDO " + user.toUpperCase());
-        builder.create().show();
         ListView menuList = (ListView) findViewById(R.id.listView);
         String[] items = {
                 getResources().getString(R.string.menu_juego_2048),
@@ -49,23 +45,18 @@ public class MenuJuegos extends AppCompatActivity {
                 if (strText.equalsIgnoreCase(getResources().getString(
                         R.string.menu_juego_2048))) {
                     startActivity(new Intent(MenuJuegos.this,
-                            MainActivity.class));
+                            Main2048.class));
 
                 } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_juego_peg))) {
-// Launch the Help Activity
+                // Launch the Help Activity
                 startActivity(new Intent(MenuJuegos.this,
-                        MainActivity.class));
+                        MainPegSolitaire.class));
             } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_item_settings))) {
-// Launch the Settings Activity
+                // Launch the Settings Activity
                 startActivity(new Intent(MenuJuegos.this,
                         Settings.class));
-//            } else if (strText.equalsIgnoreCase(getResources().getString(
-//                    R.string.menu_item_scores))) {
-//// Launch the Scores Activity
-//                startActivity(new Intent(MenuJuegos.this,
-//                        TotalScores.class));
                 }
             }
         });

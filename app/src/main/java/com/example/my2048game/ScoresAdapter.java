@@ -1,14 +1,15 @@
 package com.example.my2048game;
 
 import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder>{
     // Member variables.
@@ -24,7 +25,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder
     @Override
     public ScoresAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mContext).
-                inflate(R.layout.score2048_list_view, parent, false));
+                inflate(R.layout.score_list_view, parent, false));
     }
 
     @Override
@@ -32,9 +33,21 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder
                                  int position) {
         // Get current Score.
         Score currentScore = mScoresData.get(position);
-//        Glide.with(mContext).load(currentScore.getImageResource()).into(holder.mScoresImage);
         // Populate the textviews with data.
         holder.bindTo(currentScore);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                    Score currentScore = mScoresData.get(getAdapterPosition());
+                    Intent detailIntent = new Intent(holder.itemView.getContext(), DetailActivity.class);
+                    detailIntent.putExtra("user", currentScore.getUsername());
+                    detailIntent.putExtra("game", currentScore.getGame());
+                    detailIntent.putExtra("time", currentScore.getTime());
+                    detailIntent.putExtra("score", currentScore.getScoreTotal());
+                    holder.itemView.getContext().startActivity(detailIntent);
+
+                }
+        });
     }
 
     @Override
@@ -42,9 +55,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder
         return mScoresData.size();
     }
 
-
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ImageView mScoresImage;
+    class ViewHolder extends RecyclerView.ViewHolder {
         // Member Variables for the TextViews
         private TextView mScoreUser;
         private TextView mGame;
@@ -57,8 +68,23 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder
             mGame = itemView.findViewById(R.id.game);
             mScoreTime = itemView.findViewById(R.id.scoreTime);
             mScoreTotal = itemView.findViewById(R.id.scoreTotal);
-//            mScoresImage = (ImageView) itemView.findViewById(R.id.imgScore);
-//            itemView.setOnClickListener(this);
+
+        }
+
+        public TextView getScoreUser() {
+            return mScoreUser;
+        }
+
+        public TextView getGame() {
+            return mGame;
+        }
+
+        public TextView getScoreTime() {
+            return mScoreTime;
+        }
+
+        public TextView getScoreTotal() {
+            return mScoreTotal;
         }
 
         void bindTo(Score currentScore){
@@ -67,21 +93,6 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder
             mGame.setText(currentScore.getGame());
             mScoreTime.setText(currentScore.getTime());
             mScoreTotal.setText(currentScore.getScoreTotal());
-            // Load the images into the ImageView using the Glide library.
-//            Glide.with(mContext).load(
-//                    currentScore.getImageResource()).into(mScoresImage);
-
-        }
-        @Override
-        public void onClick(View view) {
-            Score currentScore = mScoresData.get(getAdapterPosition());
-            Intent detailIntent = new Intent(mContext, DetailActivity.class);
-            detailIntent.putExtra("Username", currentScore.getUsername());
-            detailIntent.putExtra("game", currentScore.getGame());
-            detailIntent.putExtra("Time", currentScore.getUsername());
-            detailIntent.putExtra("Score", currentScore.getUsername());
-            detailIntent.putExtra("image_resource", currentScore.getImageResource());
-            mContext.startActivity(detailIntent);
         }
     }
 }

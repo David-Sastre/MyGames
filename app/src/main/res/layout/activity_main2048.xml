@@ -7,12 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
-    tools:context=".MenuJuegos">
+    tools:context=".Main2048">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/menu"
+        android:text="@string/menu_juego_2048"
         android:textSize="@dimen/screen_title_size"
         android:textStyle="bold"
         android:textColor="@color/white"

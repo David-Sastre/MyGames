@@ -1,7 +1,6 @@
 package com.example.my2048game;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +9,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class Main2048 extends AppCompatActivity {
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2048);
         ListView menuList = (ListView) findViewById(R.id.listView);
+        username = MenuJuegos.user;
 
         String[] items = {
                 getResources().getString(R.string.menu_item_play),
@@ -36,37 +37,31 @@ public class MainActivity extends AppCompatActivity {
                 String strText = textView.getText().toString();
                 if (strText.equalsIgnoreCase(getResources().getString(
                         R.string.menu_item_play))) {
-                    startActivity(new Intent(MainActivity.this,
-                            Game1.class));
-
+                    Intent intent = new Intent(Main2048.this,
+                            Game2048.class);
+                    intent.putExtra("user", username);
+                    startActivity(intent);
                 } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_item_help))) {
-// Launch the Help Activity
-                startActivity(new Intent(MainActivity.this,
-                        Game2.class));
-            } else if (strText.equalsIgnoreCase(getResources().getString(
+                // Launch the Help Activity
+//                startActivity(new Intent(Main2048.this,
+//                        Help2048.class));
+                } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_item_settings))) {
-// Launch the Settings Activity
-                startActivity(new Intent(MainActivity.this,
-                        Settings.class));
-            } else if (strText.equalsIgnoreCase(getResources().getString(
+                // Launch the Settings Activity
+                    Intent intent = new Intent(Main2048.this,
+                            Settings.class);
+                    intent.putExtra("user", username);
+                    startActivity(intent);
+                } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_item_scores))) {
-// Launch the Scores Activity
-                startActivity(new Intent(MainActivity.this,
-                        ScoreGames.class));
-            }
-
-
+                // Launch the Scores Activity
+                    Intent intent = new Intent(Main2048.this,
+                            ScoreGames.class);
+                    intent.putExtra("user", username);
+                    startActivity(intent);
+                }
             }
         });
-    }
-
-    public void startGame (View v){
-        Intent i = new Intent(this,Game1.class);
-        startActivity(i);
-    }
-    public void startGame2 (View v){
-        Intent i = new Intent(this, Game2.class);
-        startActivity(i);
     }
 }

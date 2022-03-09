@@ -12,20 +12,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-
-public class Game2 extends AppCompatActivity {
+public class GamePeg extends AppCompatActivity {
 
     private DBHelper mDB;
     private Chronometer mChronometer;
     public static int HOLE =0, PEG = 1, SELECTED = 3;
     private int casillas = 7;
     private int movimientos = 0;
+    private int score;
     private String totalscore;
+    private String scorecopy;
+    private TextView txtscore;
     private Button [][] butons = new Button[casillas][casillas];
     private boolean firstClick = true;
     private boolean firstMove = true;
@@ -48,7 +46,9 @@ public class Game2 extends AppCompatActivity {
         setContentView(R.layout.activity_pegsolitaire);
         mDB = new DBHelper(this);
         contarFichas();
+        updatePeg();
         mChronometer = findViewById(R.id.chronometer);
+        txtscore = findViewById(R.id.score);
         for (int i = 0; i<butons.length; i++) {
             for (int j = 0; j < butons[0].length; j++) {
                 copiaPeg[i][j]=pegMap[i][j];
@@ -57,6 +57,7 @@ public class Game2 extends AppCompatActivity {
                 butons[i][j] = findViewById(resID);
             }
         }
+
     }
 
     public void Click(View view) {
@@ -78,15 +79,16 @@ public class Game2 extends AppCompatActivity {
             for (int x = 0; x < pegMap.length; x++) {
                 for (int y = 0; y < pegMap.length; y++) {
                     copiaPeg[x][y]=pegMap[x][y];
+                    scorecopy = txtscore.getText().toString();
                 }
             }
             checkMovimiento(i,j);
             if (gameOver()){
                 if (contarFichas()==1){
-                    Intent intent = new Intent(Game2.this, SplashVictory.class);
+                    Intent intent = new Intent(GamePeg.this, SplashVictory.class);
                     startActivity(intent);
                 } else {
-                    Intent intent1 = new Intent(Game2.this, SplashGameOver.class);
+                    Intent intent1 = new Intent(GamePeg.this, SplashGameOver.class);
                     startActivity(intent1);
                 }
                 mDB.insertScore(MenuJuegos.user,"PEG", mChronometer.getText().toString(), totalscore);
@@ -202,6 +204,7 @@ public class Game2 extends AppCompatActivity {
     }
 
     public void undo(View view){
+        totalscore = scorecopy;
         for (int i = 0; i < copiaPeg.length; i++) {
             for (int j = 0; j < copiaPeg[0].length; j++) {
                 pegMap[i][j]=copiaPeg[i][j];
@@ -217,13 +220,13 @@ public class Game2 extends AppCompatActivity {
                 }
             }
         }
-
+        txtscore.setText(totalscore);
         firstClick = true;
     }
 
     public void restart(View view){
         finish();
-        Intent i = new Intent(this,Game2.class);
+        Intent i = new Intent(this, GamePeg.class);
         startActivity(i);
         firstClick = true;
         firstMove=true;
@@ -292,12 +295,19 @@ public class Game2 extends AppCompatActivity {
 
     public void newScore(){
         long elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
-        int minusTime = (int) ((elapsedMillis/1000)*0.1);
-        int score = (int) (movimientos*5 - minusTime);
+        int minusTime = (int) ((elapsedMillis/1000));
+        if (minusTime<25) {
+            score +=5;
+        } else if ( minusTime >= 25 && minusTime < 40){
+            score +=4;
+        } else if ( minusTime >= 40 && minusTime < 60){
+            score +=3;
+        } else {
+            score +=2;
+        }
         if ( score< 0){
             score = 0;
         }
-        TextView txtscore = (TextView) findViewById(R.id.score);
         totalscore = String.valueOf(score);
         txtscore.setText(totalscore);
     }

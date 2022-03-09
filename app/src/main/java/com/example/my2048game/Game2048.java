@@ -14,10 +14,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
-public class Game1 extends AppCompatActivity implements GestureDetector.OnGestureListener {
-    private static final String STATE_SCORE = "Best Score";
+public class Game2048 extends AppCompatActivity implements GestureDetector.OnGestureListener {
+
+    private DBHelper mDB;
     private int bestScore = 0;
-    TextView bestScoreText;
+    TextView tscore;
     private float x1, x2, y1, y2;
     private static int MIN_DISTANCE = 100;
     private GestureDetector Detector;
@@ -329,23 +330,12 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
     }
 
     public void score(int score) {
-        TextView tv = (TextView) findViewById(R.id.score);
-        tv.setText(Integer.toString(score));
+        tscore = (TextView) findViewById(R.id.score);
+        tscore.setText(Integer.toString(score));
     }
 
-//    public void bestScore(){
-//        if (bestScore == 0){
-//            bestScore = score;
-//            TextView bs = (TextView) findViewById(R.id.bestScore);
-//            bs.setText(Integer.toString(bestScore));
-//        } else if (bestScore < score){
-//            TextView bs = (TextView) findViewById(R.id.bestScore);
-//            bs.setText(Integer.toString(score));
-//        }
-//    }
-
     public void restart(View view) {
-        Intent i = new Intent(this,Game1.class);
+        Intent i = new Intent(this, Game2048.class);
         startActivity(i);
         finish();
     }
@@ -391,8 +381,9 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
         if (!checkTablero()){
             if ((!checkRight())&&(!checkLeft())&&(!checkUp())&&(!checkDown())){
                 finish();
-                Intent intent = new Intent(Game1.this, SplashGameOver.class);
+                Intent intent = new Intent(Game2048.this, SplashGameOver.class);
                 startActivity(intent);
+                mDB.insertScore(MenuJuegos.user,"2048", mChronometer.getText().toString(), String.valueOf(score));
                 finish();
                 return true;
             }
@@ -403,6 +394,7 @@ public class Game1 extends AppCompatActivity implements GestureDetector.OnGestur
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2048game);
+        mDB = new DBHelper(this);
 //        bestScoreText = findViewById(R.id.bestScore);
         mChronometer = findViewById(R.id.chronometer);
         //Iniciamos el GestureDetector

@@ -37,13 +37,13 @@ public class DBHelper extends SQLiteOpenHelper {
                     KEY_USER + " TEXT PRIMARY KEY, " +
                     KEY_PASSWORD + " TEXT );";
 
-    private static final String TABLE_SCORE_CREATE =
-            "CREATE TABLE " +
-                    T_SCORE + " (" +
-                    KEY_USER + " TEXT, " +
-                    KEY_GAME + " TEXT, " +
-                    KEY_TIME + " TEXT, " +
-                    KEY_TOTSCORE + " TEXT );";
+//    private static final String TABLE_SCORE_CREATE =
+//            "CREATE TABLE " +
+//                    T_SCORE + " (" +
+//                    KEY_USER + " TEXT FOREIGN KEY (user) REFERENCES Users(user)," +
+//                    KEY_GAME + " TEXT, " +
+//                    KEY_TIME + " TEXT, " +
+//                    KEY_TOTSCORE + " TEXT );";
 
     private SQLiteDatabase mWritableDB;
     private SQLiteDatabase mReadableDB;
@@ -55,7 +55,11 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
-        db.execSQL(TABLE_SCORE_CREATE);
+//        db.execSQL(TABLE_SCORE_CREATE);
+        db.execSQL("CREATE TABLE IF NOT EXISTS Scores ( user TEXT, game TEXT, time TEXT, total_Score TEXT, " +
+                " FOREIGN KEY (user) REFERENCES " +
+                "Users (user));");
+        adminDB(db);
     }
 
     @Override
@@ -64,7 +68,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + T_SCORE);
         onCreate(db);
+    }
+
+    private void adminDB(SQLiteDatabase db){
+        String user = "admin";
+        String password = "admin";
+        ContentValues values = new ContentValues();
+        values.put(KEY_USER, user);
+        values.put(KEY_PASSWORD, password);
+        db.insert(TABLE, null, values);
     }
 
     public long insertPlayer(String user, String password){
@@ -121,19 +135,34 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return false;
     }
-//    public int delete(String user) {
-//        int deleted = 0;
-//        try {
-//            if (mWritableDB == null) {
-//                mWritableDB = getWritableDatabase();
-//            }
-//            deleted = mWritableDB.delete(TABLE,
-//                    KEY_USER + " = ? ", new String[]{String.valueOf(user)});
-//
-//        } catch (Exception e) {
-//            Log.d (TAG, "DELETE EXCEPTION! " + e.getMessage());
-//        }return deleted;
-//    }
+    public int delete(String user) {
+        int deleted = 0;
+        try {
+            if (mWritableDB == null) {
+                mWritableDB = getWritableDatabase();
+            }
+            deleted = mWritableDB.delete(TABLE,
+                    KEY_USER + " = ? ", new String[]{String.valueOf(user)});
+
+        } catch (Exception e) {
+            Log.d (TAG, "DELETE EXCEPTION! " + e.getMessage());
+        }return deleted;
+    }
+
+    public int deleteScore(String user, String game, String time, String total_score ) {
+        int deleted = 0;
+        try {
+            if (mWritableDB == null) {
+                mWritableDB = getWritableDatabase();
+            }
+            deleted = mWritableDB.delete(T_SCORE,
+                    KEY_USER + "=? AND " + KEY_GAME + "=? AND " +
+                            KEY_TIME + "=? AND " + KEY_TOTSCORE + "=?",
+                    new String[] {user, game, time, total_score});
+        } catch (Exception e) {
+            Log.d (TAG, "DELETE EXCEPTION! " + e.getMessage());
+        }return deleted;
+    }
 
     public int updateUser(String user, String password){
         int updated = 0;

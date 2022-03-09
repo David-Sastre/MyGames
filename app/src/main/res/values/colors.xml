@@ -33,4 +33,6 @@
     <color name="menu_color">#FFFF0F</color>
     <color name="menu_glow">#F00</color>
     <color name="bckg2048">#FBF8EF</color>
+    <color name="Red">#F51303</color>
+    <color name="Transparent">#55000000</color>
 </resources>

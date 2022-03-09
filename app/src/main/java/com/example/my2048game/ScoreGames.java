@@ -1,11 +1,19 @@
 package com.example.my2048game;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.drawable.Drawable;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.content.res.TypedArray;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -21,18 +29,21 @@ public class ScoreGames extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ArrayList<Score> mScoreData;
     private ScoresAdapter mAdapter;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score2048);
+        setContentView(R.layout.activity_score);
         mDB = new DBHelper(this);
-
+        username = MenuJuegos.user;
+        int gridColumnCount = 1;
         // Initialize the RecyclerView.
         mRecyclerView = findViewById(R.id.recyclerView);
 
+
         // Set the Layout Manager.
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, gridColumnCount));
 
         // Initialize the ArrayList that will contain the data.
         mScoreData = new ArrayList<>();
@@ -43,12 +54,14 @@ public class ScoreGames extends AppCompatActivity {
 
         initializeData();
 
+
 //        int swipeDirs;
-//        if (gridColumnCount > 1) {
+//        if(gridColumnCount > 1){
 //            swipeDirs = 0;
 //        } else {
 //            swipeDirs = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
 //        }
+//
 //        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback
 //                (ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN
 //                        | ItemTouchHelper.UP, swipeDirs) {
@@ -67,14 +80,14 @@ public class ScoreGames extends AppCompatActivity {
 //
 //            @Override
 //            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-//                mScoreData.remove(viewHolder.getAdapterPosition());
-//                mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+//                    mScoreData.remove(viewHolder.getAdapterPosition());
+//                    mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+//
 //
 //            }
 //        });
 //        helper.attachToRecyclerView(mRecyclerView);
     }
-
     /**
      * Initialize the Scores data from resources.
      */
@@ -92,14 +105,24 @@ public class ScoreGames extends AppCompatActivity {
         // Create the ArrayList of Scores objects with titles and
         // information about each Score.
         for (int i = 0; i < ScoresUser.length; i++) {
-            mScoreData.add(new Score(ScoresUser[i], game[i], ScoresTime[i], ScoresTotal[i],
-                    R.drawable.ic_twotone_emoji_events_24));
+            mScoreData.add(new Score(ScoresUser[i], game[i], ScoresTime[i], ScoresTotal[i]));
         }
         // Notify the adapter of the change.
         mAdapter.notifyDataSetChanged();
     }
+    public void back (View view){
+        Intent intent = new Intent(ScoreGames.this,
+                MenuJuegos.class);
+        intent.putExtra("user", username);
+        startActivity(intent);
+    }
 
-//    public void resetScores(View view) {
+    @Override
+    public void onBackPressed() {
+
+    }
+
+//        public void resetScores() {
 //        initializeData();
 //    }
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bckg2048"
-    tools:context=".Game1">
+    tools:context=".Game2048">
 
     <LinearLayout
         android:id="@+id/LinearLayout"
@@ -32,6 +32,7 @@
             android:orientation="horizontal"
             android:layout_gravity="right"
             android:id="@+id/LinearLayout2">
+
             <TextView
                 android:id="@+id/Txtscore"
                 android:layout_width="wrap_content"
@@ -42,17 +43,6 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/TxtbestScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/gridFondo"
-                android:text="@string/high_score"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center"/>
 
         </LinearLayout>
 
@@ -65,9 +55,9 @@
 
             <TextView
                 android:id="@+id/score"
-                android:layout_above="@+id/Txtscore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_above="@+id/Txtscore"
                 android:background="@color/gridFondo"
                 android:gravity="center"
                 android:text="@string/score"

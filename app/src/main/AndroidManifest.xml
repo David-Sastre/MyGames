@@ -11,12 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
+            android:name=".MainPegSolitaire"
+            android:exported="true" />
+        <activity
             android:name=".Settings"
             android:exported="true" />
         <activity
             android:name=".ScoreGames"
-            android:exported="true" />
-        <!-- <activity -->
+            android:exported="true" /> <!-- <activity -->
         <!-- android:name=".DBHelper" -->
         <!-- android:exported="true" /> -->
         <activity
@@ -46,14 +48,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Main2048"
             android:exported="true" />
         <activity
-            android:name=".Game1"
-            android:exported="false" />
+            android:name=".Game2048"
+            android:exported="true" />
         <activity
-            android:name=".Game2"
-            android:exported="false" />
+            android:name=".GamePeg"
+            android:exported="true" />
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
