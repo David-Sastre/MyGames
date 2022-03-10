@@ -66,12 +66,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     *
-     * @param db
-     * @param oldVersion
-     * @param newVersion
-     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(DBHelper.class.getName(),
@@ -83,6 +77,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Generamos un usuario Admin
      * @param db
      */
     private void adminDB(SQLiteDatabase db){
@@ -95,6 +90,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Metodo para insertar un usuario.
      * @param user
      * @param password
      * @return
@@ -115,10 +111,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param user
-     * @param game
-     * @param time
-     * @param total_score
+     * Metodo para insertar puntuación.
+     * @param user recibe el usuario
+     * @param game recibe el juego actual
+     * @param time recibe el tiempo
+     * @param total_score puntuación total
      * @return
      */
     public long insertScore (String user, String game, String time, String total_score ){
@@ -142,6 +139,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Metodo para ver si existe el usuario.
      * @param user
      * @param password
      * @return
@@ -167,6 +165,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Metodo para borrar el usuario.
      * @param user
      * @return
      */
@@ -185,6 +184,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Metodo para borrar puntuación.
      * @param user
      * @param game
      * @param time
@@ -207,6 +207,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Método modificar contraseña user.
      * @param user
      * @param password
      * @return
@@ -230,6 +231,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Método para buscar si existe ese usuario
      * @param user
      * @return
      */
@@ -252,6 +254,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Cursor para la puntuación
      * @param param
      * @return
      */
