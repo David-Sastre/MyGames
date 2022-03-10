@@ -94,8 +94,8 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
      * Método que al hacer un swipe a la derecha realizará diversos métodos
      */
     private void swipeRight (){
-        boardCopy();
         if (checkRight()) {
+            boardCopy();
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasDcha(i);
                 sumarDerecha(i);
@@ -110,8 +110,8 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
      * Método que al hacer un swipe a la izquierda realizará diversos métodos
      */
     private void swipeLeft () {
-        boardCopy();
         if (checkLeft()){
+            boardCopy();
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasIzq(i);
                 sumarIzquierda(i);
@@ -126,8 +126,8 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
      * Método que al hacer un swipe hacia arriba realizará diversos métodos
      */
     private void swipeUp(){
-        boardCopy();
         if (checkUp()) {
+            boardCopy();
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasArriba(i);
                 sumarArriba(i);
@@ -142,8 +142,8 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
      * Método que al hacer un swipe hacia abajo realizará diversos métodos
      */
     public void swipeDown(){
-        boardCopy();
         if (checkDown()) {
+            boardCopy();
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasAbajo(i);
                 sumarAbajo(i);
