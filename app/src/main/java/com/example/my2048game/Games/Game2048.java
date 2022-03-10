@@ -202,7 +202,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         for (int j = butons[0].length-1; j > 0; j--) {
             if ((butons[fila][j].getText()).equals((butons[fila][j - 1].getText()))) {
                 if ((butons[fila][j].getText()).equals("") || (butons[fila][j - 1].getText().equals(""))) {
-                    System.out.println("No se puede sumar");
+                    //Al no poder sumar no hace nada.
                 } else {
                     boton = Integer.parseInt(butons[fila][j].getText().toString());
                     butons[fila][j - 1].setText("");
@@ -240,7 +240,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         for (int j = 0; j < butons[0].length-1; j++) {
             if ((butons[fila][j].getText()).equals((butons[fila][j + 1].getText()))) {
                 if ((butons[fila][j].getText()).equals("") || (butons[fila][j + 1].getText().equals(""))) {
-                    System.out.println("No se puede sumar");
+                    //Al no poder sumar no hace nada.
                 } else {
                     boton = Integer.parseInt(butons[fila][j].getText().toString());
                     butons[fila][j + 1].setText("");
@@ -278,7 +278,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         for (int i = 0; i < 3 ; i++) {
             if ((butons[i][columna].getText()).equals((butons[i+1][columna].getText()))) {
                 if ((butons[i][columna].getText()).equals("") || (butons[i+1][columna].getText().equals(""))) {
-                    System.out.println("No se puede sumar");
+                    //Al no poder sumar no hace nada.
                 } else {
                     boton = Integer.parseInt(butons[i][columna].getText().toString());
                     butons[i+1][columna].setText("");

@@ -113,9 +113,7 @@ public class GamePeg extends AppCompatActivity {
             prevI = i;
             prevJ = j;
             firstClick = false;
-            System.out.println(contarFichas());
         }
-        System.out.println("FirstClick = " + firstClick);
     }
 
 
