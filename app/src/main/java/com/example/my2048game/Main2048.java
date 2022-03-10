@@ -41,6 +41,7 @@ public class Main2048 extends AppCompatActivity {
                             Game2048.class);
                     intent.putExtra("user", username);
                     startActivity(intent);
+                    finish();
                 } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_item_help))) {
                 // Launch the Help Activity
@@ -53,6 +54,7 @@ public class Main2048 extends AppCompatActivity {
                             Settings.class);
                     intent.putExtra("user", username);
                     startActivity(intent);
+                    finish();
                 } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_item_scores))) {
                 // Launch the Scores Activity
@@ -60,6 +62,7 @@ public class Main2048 extends AppCompatActivity {
                             ScoreGames.class);
                     intent.putExtra("user", username);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

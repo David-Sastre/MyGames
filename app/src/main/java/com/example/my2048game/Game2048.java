@@ -1,6 +1,8 @@
 package com.example.my2048game;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
@@ -62,7 +65,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasDcha(i);
                 sumarDerecha(i);
-                winnerChickenDinner();
+                winner();
                 desplazarFilasDcha(i);
             }
             insertRandom();
@@ -75,7 +78,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasIzq(i);
                 sumarIzquierda(i);
-                winnerChickenDinner();
+                winner();
                 desplazarFilasIzq(i);
             }
         insertRandom();
@@ -88,7 +91,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
             for (i = 0; i < butons.length; i++) {
                 desplazarFilasArriba(i);
                 sumarArriba(i);
-                winnerChickenDinner();
+                winner();
                 desplazarFilasArriba(i);
             }
             insertRandom();
@@ -103,7 +106,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
                 sumarAbajo(i);
                 desplazarFilasAbajo(i);
             }
-            winnerChickenDinner();
+            winner();
             insertRandom();
         }
     }
@@ -365,7 +368,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         mChronometer.start();
     }
 
-    public void winnerChickenDinner() {
+    public void winner() {
         for (int i = 0; i < butons.length; i++) {
             for (int j = 0; j < butons[0].length; j++) {
                 if (butons[i][j].getText().equals("2048") && aux==0){
@@ -381,6 +384,7 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
             if ((!checkRight())&&(!checkLeft())&&(!checkUp())&&(!checkDown())){
                 finish();
                 Intent intent = new Intent(Game2048.this, SplashGameOver.class);
+                intent.putExtra("score", tscore.getText().toString());
                 startActivity(intent);
                 mDB.insertScore(MenuJuegos.user,"2048", mChronometer.getText().toString(), String.valueOf(score));
                 finish();
@@ -483,6 +487,29 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(Game2048.this);
+        builder.setMessage("Are you sure you want to exit?\n" +
+                "\n" +
+                "The data will not be saved.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startActivity(new Intent(Game2048.this,
+                                Main2048.class));
+                        finish();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
 }
 
 

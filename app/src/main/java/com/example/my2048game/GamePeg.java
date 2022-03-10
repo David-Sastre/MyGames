@@ -1,6 +1,8 @@
 package com.example.my2048game;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -86,9 +88,11 @@ public class GamePeg extends AppCompatActivity {
             if (gameOver()){
                 if (contarFichas()==1){
                     Intent intent = new Intent(GamePeg.this, SplashVictory.class);
+                    intent.putExtra("score", txtscore.getText().toString());
                     startActivity(intent);
                 } else {
                     Intent intent1 = new Intent(GamePeg.this, SplashGameOver.class);
+                    intent1.putExtra("score", txtscore.getText().toString());
                     startActivity(intent1);
                 }
                 mDB.insertScore(MenuJuegos.user,"PEG", mChronometer.getText().toString(), totalscore);
@@ -320,6 +324,30 @@ public class GamePeg extends AppCompatActivity {
     public void updatePeg(){
         TextView txtpeg = (TextView) findViewById(R.id.Txtpeg);
         txtpeg.setText("Hay " + contarFichas() + " pegs en el tablero.");
+    }
+
+    @Override
+    public void onBackPressed() {
+        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(GamePeg.this);
+        builder.setMessage("Are you sure you want to exit?\n" +
+                "\n" +
+                "The data will not be saved.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startActivity(new Intent(GamePeg.this,
+                                MainPegSolitaire.class));
+                        finish();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 }
 

@@ -13,52 +13,66 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/buttonsbackground"
         android:padding="10dp">
         <ImageView
             android:id="@+id/imgScore"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
+            android:paddingRight="10dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_twotone_emoji_events_24"
             android:adjustViewBounds="true"/>
         <LinearLayout
             android:id="@+id/linearItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/scoreUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textSize="16dp"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textAlignment="center"
                 android:layout_marginLeft="5sp"
-                android:paddingRight="5sp"/>
+                android:paddingRight="10dp"/>
             <TextView
                 android:id="@+id/game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="14sp"
-                android:paddingRight="5sp"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:paddingRight="10dp"/>
 
             <TextView
                 android:id="@+id/scoreTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="14sp"
-                android:paddingRight="5sp"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:paddingRight="10dp"/>
 
             <TextView
                 android:id="@+id/scoreTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="right"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:paddingRight="10dp"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -39,7 +39,7 @@ public class MainPegSolitaire extends AppCompatActivity {
                         R.string.menu_item_play))) {
                     startActivity(new Intent(MainPegSolitaire.this,
                             GamePeg.class));
-
+                    finish();
                 } else if (strText.equalsIgnoreCase(getResources().getString(
                         R.string.menu_item_help))) {
                     // Launch the Help Activity
@@ -54,6 +54,7 @@ public class MainPegSolitaire extends AppCompatActivity {
                             Settings.class);
                     intent.putExtra("user", username);
                     startActivity(intent);
+                    finish();
                 } else if (strText.equalsIgnoreCase(getResources().getString(
                         R.string.menu_item_scores))) {
                 // Launch the Scores Activity
@@ -61,6 +62,7 @@ public class MainPegSolitaire extends AppCompatActivity {
                             ScoreGames.class);
                     intent.putExtra("user", username);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
