@@ -41,6 +41,34 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         return score;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_2048game);
+        mDB = new DBHelper(this);
+//        bestScoreText = findViewById(R.id.bestScore);
+        mChronometer = findViewById(R.id.chronometer);
+        //Iniciamos el GestureDetector
+        Detector = new GestureDetector(this, this);
+        for (int i = 0; i<butons.length; i++){
+            for(int j=0; j<butons[0].length; j++){
+                String buttonID = "btn" + i +j;
+                int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+                butons[i][j] = findViewById(resID);
+            }
+        }
+        checkTablero();
+        for (int x = 0; x < 2; x++) {
+            insertRandom();
+        }
+        changeColor();
+        boardCopy();
+        startTimer();
+    }
+
+    /**
+     * Método para insertar un número (2 o 4) en posiciones aleatorias
+     */
     private void insertRandom() {
         if(checkTablero()){
             int i = new Random().nextInt(butons.length);
@@ -58,11 +86,13 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
         changeColor();
         score(score);
-//        bestScore();
         gameOver();
     }
 
 
+    /**
+     * Método que al hacer un swipe a la derecha realizará diversos métodos
+     */
     private void swipeRight (){
         boardCopy();
         if (checkRight()) {
@@ -76,6 +106,9 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Método que al hacer un swipe a la izquierda realizará diversos métodos
+     */
     private void swipeLeft () {
         boardCopy();
         if (checkLeft()){
@@ -89,6 +122,9 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Método que al hacer un swipe hacia arriba realizará diversos métodos
+     */
     private void swipeUp(){
         boardCopy();
         if (checkUp()) {
@@ -102,6 +138,9 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Método que al hacer un swipe hacia abajo realizará diversos métodos
+     */
     public void swipeDown(){
         boardCopy();
         if (checkDown()) {
@@ -115,6 +154,9 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Cambiar color de las casillas según su texto.
+     */
     private void changeColor() {
         for (int i=0; i< butons.length; i++){
             for (int j=0; j< butons[0].length; j++) {
@@ -150,6 +192,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Metodo que sumará las casillas cuando se cumplan las condiciones establecidas.
+     * @param fila integer que recorrerá las filas
+     */
     public void sumarDerecha(int fila) {
         int resultado, boton;
         String resString;
@@ -169,6 +215,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     *Método que desplazará las casillas.
+     * @param fila integer que recorrerá las filas
+     */
     public void desplazarFilasDcha(int fila) {
         for (int i = 0; i < butons.length; i++) {
             for (int j = butons[0].length-1; j > 0; j--) {
@@ -180,6 +230,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Metodo que sumará las casillas cuando se cumplan las condiciones establecidas.
+     * @param fila integer que recorrerá las filas
+     */
     public void sumarIzquierda(int fila){
         int resultado, boton;
         String resString;
@@ -199,6 +253,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     *Método que desplazará las casillas.
+     * @param fila integer que recorrerá las filas
+     */
     public void desplazarFilasIzq(int fila) {
         for (int i = 0; i < butons.length; i++) {
             for (int j = 0; j < butons[0].length-1; j++) {
@@ -210,6 +268,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Metodo que sumará las casillas cuando se cumplan las condiciones establecidas.
+     * @param columna integer que recorrerá las filas
+     */
     public void sumarArriba(int columna){
         int resultado, boton;
         String resString;
@@ -230,6 +292,11 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+
+    /**
+     * Método que desplazará las casillas.
+     * @param columna
+     */
     public void desplazarFilasArriba(int columna){
         for (int x = 0; x < butons.length; x++) {
             for (int i = 0; i < butons.length-1; i++) {
@@ -241,6 +308,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Metodo que sumará las casillas cuando se cumplan las condiciones establecidas.
+     * @param columna
+     */
     public void sumarAbajo (int columna){
         int resultado, boton;
         String resString;
@@ -260,6 +331,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Método que desplazará las casillas.
+     * @param columna
+     */
     public void desplazarFilasAbajo(int columna){
         for (int x = 0; x < butons.length; x++) {
             for (int i = butons.length-1; i > 0; i--) {
@@ -271,6 +346,9 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * @return Devolvera un true or false, si el tablero está lleno o vacio.
+     */
     public boolean checkTablero() {
         for (int i = 0; i < butons.length; i++) {
             for (int j = 0; j < butons[0].length; j++) {
@@ -282,6 +360,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         return false;
     }
 
+    /**
+     * @return Devolvera true or false, depediendo de si hay algun movimiento dispnible
+     * hacia la derecha
+     */
     public boolean checkRight (){
         for (int fila = 0; fila < butons.length; fila++) {
             for (int j = butons.length-1; j > 0; j--) {
@@ -295,6 +377,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         } return false;
     }
 
+    /**
+     * @return Devolvera true or false, depediendo de si hay algun movimiento dispnible
+     * hacia la izquierda
+     */
     public boolean checkLeft (){
         for (int  fila = 0;  fila < butons.length;  fila++) {
             for (int j = 0; j < butons[0].length-1; j++) {
@@ -309,6 +395,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         } return false;
     }
 
+    /**
+     * @return Devolvera true or false, depediendo de si hay algun movimiento dispnible
+     * hacia arriba
+     */
     public boolean checkUp() {
         for (int columna = 0; columna < butons.length; columna++) {
             for (int i = 0; i < butons[0].length-1; i++) {
@@ -322,6 +412,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }return false;
     }
 
+    /**
+     * @return Devolvera true or false, depediendo de si hay algun movimiento dispnible
+     * hacia la abajo
+     */
     public boolean checkDown(){
         for (int columna = 0; columna < butons.length; columna++) {
             for (int i = butons.length-1; i > 0; i--) {
@@ -335,17 +429,29 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }return false;
     }
 
+    /**
+     * Metodo para que salga por pantalla la puntuación.
+     * @param score
+     */
     public void score(int score) {
         tscore = (TextView) findViewById(R.id.score);
         tscore.setText(Integer.toString(score));
     }
 
+
+    /**
+     * Genera una actividad y termina la anterior.
+     * @param view
+     */
     public void restart(View view) {
         Intent i = new Intent(this, Game2048.class);
         startActivity(i);
         finish();
     }
 
+    /**
+     * Copiar tablero
+     */
     public void boardCopy(){
         scorecopy = getScore();
         for (int i = 0; i < butons.length; i++) {
@@ -355,6 +461,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Deshacer el movimiento anterior.
+     * @param view
+     */
     public void Undo(View view){
 
         for (int i = 0; i < copia.length; i++) {
@@ -367,11 +477,17 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         changeColor();
     }
 
+    /**
+     * Iniciamos el chronometro.
+     */
     private void startTimer() {
         mChronometer.setBase(SystemClock.elapsedRealtime());
         mChronometer.start();
     }
 
+    /**
+     * Metodo para verificar si hay ganador
+     */
     public void winner() {
         for (int i = 0; i < butons.length; i++) {
             for (int j = 0; j < butons[0].length; j++) {
@@ -383,6 +499,10 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
         }
     }
 
+    /**
+     * Devolvera un true or false, para averiguar si la partida ha terminado
+     * @return
+     */
     public boolean gameOver(){
         if (!checkTablero()){
             if ((!checkRight())&&(!checkLeft())&&(!checkUp())&&(!checkDown())){
@@ -395,31 +515,6 @@ public class Game2048 extends AppCompatActivity implements GestureDetector.OnGes
                 return true;
             }
         } return false;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_2048game);
-        mDB = new DBHelper(this);
-//        bestScoreText = findViewById(R.id.bestScore);
-        mChronometer = findViewById(R.id.chronometer);
-        //Iniciamos el GestureDetector
-        Detector = new GestureDetector(this, this);
-        for (int i = 0; i<butons.length; i++){
-            for(int j=0; j<butons[0].length; j++){
-                String buttonID = "btn" + i +j;
-                int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
-                butons[i][j] = findViewById(resID);
-            }
-        }
-        checkTablero();
-        for (int x = 0; x < 2; x++) {
-            insertRandom();
-        }
-        changeColor();
-        boardCopy();
-        startTimer();
     }
 
 

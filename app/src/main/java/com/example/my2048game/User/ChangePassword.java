@@ -10,12 +10,14 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.my2048game.Games.MenuJuegos;
 import com.example.my2048game.R;
 import com.example.my2048game.Utils.DBHelper;
 
 public class ChangePassword extends AppCompatActivity {
-
+    private String user;
     private EditText actUser;
     private EditText modPass;
     private EditText modPass2;
@@ -28,6 +30,7 @@ public class ChangePassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+        user = MenuJuegos.user;
         mDB = new DBHelper(this);
         actUser = (EditText) findViewById(R.id.act_username);
         modPass = (EditText) findViewById(R.id.mod_password);
@@ -64,7 +67,13 @@ public class ChangePassword extends AppCompatActivity {
         modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (actUser.getText().toString().isEmpty() ||
+                if (!actUser.getText().toString().equals(user)) {
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ChangePassword.this);
+                    builder.setMessage("You cannot change another user's password")
+                            .setTitle("USER ERROR");
+                    builder.create().show();
+                }
+                else if (actUser.getText().toString().isEmpty() ||
                         modPass.getText().toString().isEmpty() ||
                         modPass2.getText().toString().isEmpty()) {
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(ChangePassword.this);
@@ -81,14 +90,12 @@ public class ChangePassword extends AppCompatActivity {
                     if (!searchSettDB()) {
                         android.app.AlertDialog.Builder builder = new AlertDialog.Builder(ChangePassword.this);
                         builder.setMessage("User does not exists")
-                                .setTitle("ERROR USER");
+                                .setTitle("USER ERROR");
                         builder.create().show();
                     } else {
                         mDB.updateUser(actUser.getText().toString(), modPass.getText().toString());
-                        android.app.AlertDialog.Builder builder = new AlertDialog.Builder(ChangePassword.this);
-                        builder.setMessage("Password change successfully")
-                                .setTitle("PASSWORD");
-                        builder.create().show();
+                        Toast.makeText(getApplicationContext(), "Password changed", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
             }

@@ -15,7 +15,7 @@ import com.example.my2048game.User.LogIn;
 
 public class Splash extends AppCompatActivity {
 
-    private static final int SPLASH_SCREEN = 4000;
+    private static final int SPLASH_SCREEN = 6500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

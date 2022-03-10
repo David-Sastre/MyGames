@@ -58,7 +58,6 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param db
      */
     @Override
-
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
         if (!db.isReadOnly()) {
@@ -83,6 +82,9 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * @param db
+     */
     private void adminDB(SQLiteDatabase db){
         String user = "admin";
         String password = "admin";
@@ -92,6 +94,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(TABLE, null, values);
     }
 
+    /**
+     * @param user
+     * @param password
+     * @return
+     */
     public long insertPlayer(String user, String password){
         long newId = 0;
         ContentValues values = new ContentValues();
@@ -107,6 +114,13 @@ public class DBHelper extends SQLiteOpenHelper {
         } return newId;
     }
 
+    /**
+     * @param user
+     * @param game
+     * @param time
+     * @param total_score
+     * @return
+     */
     public long insertScore (String user, String game, String time, String total_score ){
         long newId = 0;
         String [] args = new String []{user, game, time, total_score};
@@ -127,6 +141,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * @param user
+     * @param password
+     * @return
+     */
     public boolean selectUser(String user, String password){
         String [] args = new String[]{user,password};
         try{
@@ -146,6 +165,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    /**
+     * @param user
+     * @return
+     */
     public int deleteUser(String user) {
         int deleted = 0;
         try {
@@ -160,6 +184,13 @@ public class DBHelper extends SQLiteOpenHelper {
         }return deleted;
     }
 
+    /**
+     * @param user
+     * @param game
+     * @param time
+     * @param total_score
+     * @return
+     */
     public int deleteScore(String user, String game, String time, String total_score ) {
         int deleted = 0;
         try {
@@ -175,6 +206,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }return deleted;
     }
 
+    /**
+     * @param user
+     * @param password
+     * @return
+     */
     public int updateUser(String user, String password){
         int updated = 0;
         try {
@@ -193,6 +229,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }return updated;
     }
 
+    /**
+     * @param user
+     * @return
+     */
     public Cursor search(String user) {
         String[] columns = new String[]{KEY_USER};
         String selection = KEY_USER + " LIKE ?";
@@ -211,6 +251,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    /**
+     * @param param
+     * @return
+     */
     public String [] getScores(String param) {
         //Creamos el cursor
         Cursor cursor = null;

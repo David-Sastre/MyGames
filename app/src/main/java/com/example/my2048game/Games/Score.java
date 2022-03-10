@@ -1,7 +1,7 @@
 package com.example.my2048game.Games;
 
 public class Score {
-    // Member variables representing the title and information about the sport.
+    // Member variables representing the user, game, time and score.
     private String username;
     private String game;
     private String time;

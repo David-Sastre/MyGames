@@ -65,6 +65,11 @@ public class GamePeg extends AppCompatActivity {
 
     }
 
+    /**
+     * Al presionar en un boton, obtendrá I,J.
+     * Lo que permitirá realizar movimientos dependiendo del segundo click.
+     * @param view
+     */
     public void Click(View view) {
         int i = Character.getNumericValue(view.getTag().toString().charAt(0));
         int j = Character.getNumericValue(view.getTag().toString().charAt(1));
@@ -114,6 +119,11 @@ public class GamePeg extends AppCompatActivity {
     }
 
 
+    /**
+     * Revisa si se puede hacer el movimiento.
+     * @param i variable del último botón clicado.
+     * @param j variable del último boton clicado.
+     */
     private void checkMovimiento(int i, int j) {
         if (j == prevJ) {
             //Movimiento de abajo hacia arriba.
@@ -210,6 +220,10 @@ public class GamePeg extends AppCompatActivity {
         }
     }
 
+    /**
+     * Deshacer un movimiento.
+     * @param view
+     */
     public void undo(View view){
         totalscore = scorecopy;
         for (int i = 0; i < copiaPeg.length; i++) {
@@ -231,6 +245,10 @@ public class GamePeg extends AppCompatActivity {
         firstClick = true;
     }
 
+    /**
+     * Inicia de nuevo la actividad.
+     * @param view
+     */
     public void restart(View view){
         finish();
         Intent i = new Intent(this, GamePeg.class);
@@ -239,6 +257,10 @@ public class GamePeg extends AppCompatActivity {
         firstMove=true;
     }
 
+    /**
+     * Cuenta las fichas del tablero
+     * @return devuele el número exacto.
+     */
     public int contarFichas(){
         int suma = 0;
         for (int i = 0; i < pegMap.length; i++) {
@@ -252,7 +274,10 @@ public class GamePeg extends AppCompatActivity {
     }
 
 
-    //Comprobaciones para saber si el jugador ha terminado la partida
+    /**
+     * Devolverá true o false, de si la partida termina o no.
+     * @return true = gameOver.
+     */
     public boolean gameOver() {
         //Leemos de Izquierda a derecha
         for (int i = 0; i < pegMap.length; i++) {
@@ -300,6 +325,9 @@ public class GamePeg extends AppCompatActivity {
         }return true;
     }
 
+    /**
+     * Método para obtener la puntuación y que salga por pantalla.
+     */
     public void newScore(){
         long elapsedMillis = SystemClock.elapsedRealtime() - mChronometer.getBase();
         int minusTime = (int) ((elapsedMillis/1000));
@@ -319,16 +347,25 @@ public class GamePeg extends AppCompatActivity {
         txtscore.setText(totalscore);
     }
 
+    /**
+     * Iniciar el chronometro
+     */
     private void startTimer() {
         mChronometer.setBase(SystemClock.elapsedRealtime());
         mChronometer.start();
     }
 
+    /**
+     * Revision de cuantas fichas quedan.
+     */
     public void updatePeg(){
         TextView txtpeg = (TextView) findViewById(R.id.Txtpeg);
         txtpeg.setText("Hay " + contarFichas() + " pegs en el tablero.");
     }
 
+    /**
+     * En caso de salir se pierde el registro.
+     */
     @Override
     public void onBackPressed() {
         android.app.AlertDialog.Builder builder = new AlertDialog.Builder(GamePeg.this);

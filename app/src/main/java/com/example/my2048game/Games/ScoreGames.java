@@ -50,7 +50,7 @@ public class ScoreGames extends AppCompatActivity implements AdapterView.OnItemS
         mAdapter = new ScoresAdapter(this, mScoreData);
         mRecyclerView.setAdapter(mAdapter);
         initializeData();
-        spiners = new String[]{"usuario", "game", "tiempo", "puntuacion"};
+        spiners = new String[]{"user", "game", "time", "total_score"};
         mSpinner.setPrompt("Ordenar");
         ArrayAdapter<String> mspinAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spiners);
         mspinAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
