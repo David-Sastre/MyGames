@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.Games;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.my2048game.R;
+import com.example.my2048game.User.LogIn;
 
 public class Splash extends AppCompatActivity {
 

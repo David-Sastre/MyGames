@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.Games;
 
 public class Score {
     // Member variables representing the title and information about the sport.

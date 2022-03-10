@@ -1,8 +1,9 @@
-package com.example.my2048game;
+package com.example.my2048game.Games;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.my2048game.R;
+import com.example.my2048game.User.Settings;
+import com.example.my2048game.Utils.DBHelper;
 
 public class MenuJuegos extends AppCompatActivity {
     public static String user;
@@ -20,9 +25,6 @@ public class MenuJuegos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mDB = new DBHelper(this);
-//        mDB.insertScore("Pepe","P", "01:40", "12");
-//        mDB.insertScore("Pepe","PEG", "04:12", "40");
-//        mDB.insertScore("Pepe","PEG", "30:20", "5");
         Bundle extras = getIntent().getExtras();
         user = extras.getString("user");
         AlertDialog.Builder builder = new AlertDialog.Builder (MenuJuegos.this);
@@ -46,7 +48,6 @@ public class MenuJuegos extends AppCompatActivity {
                         R.string.menu_juego_2048))) {
                     startActivity(new Intent(MenuJuegos.this,
                             Main2048.class));
-
                 } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_juego_peg))) {
                 // Launch the Help Activity
@@ -60,5 +61,26 @@ public class MenuJuegos extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MenuJuegos.this);
+        builder.setMessage("Are you sure you want to close the app?")
+                .setTitle("CLOSE APP")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finishAffinity();
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 }

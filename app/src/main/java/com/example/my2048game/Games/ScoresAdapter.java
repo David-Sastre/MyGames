@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.Games;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.my2048game.R;
 
 
 public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ViewHolder>{

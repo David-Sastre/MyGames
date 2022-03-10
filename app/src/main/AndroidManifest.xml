@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.my2048game">
 
@@ -11,38 +12,49 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".ChangePassword"
+            android:name=".User.ChangePassword"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".MainPegSolitaire"
+            android:name=".Games.MainPegSolitaire"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".Settings"
+            android:name=".User.Settings"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".ScoreGames"
-            android:exported="true" /> <!-- <activity -->
+            android:name=".Games.ScoreGames"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+        <!-- <activity -->
         <!-- android:name=".DBHelper" -->
         <!-- android:exported="true" /> -->
         <activity
-            android:name=".Register"
+            android:name=".User.Register"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".LogIn"
+            android:name=".User.LogIn"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".SplashGameOver"
+            android:name=".Games.SplashGameOver"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".SplashVictory"
+            android:name=".Games.SplashVictory"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".MenuJuegos"
+            android:name=".Games.MenuJuegos"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".Splash"
+            android:name=".Games.Splash"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,16 +63,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Main2048"
+            android:name=".Games.Main2048"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".Game2048"
+            android:name=".Games.Game2048"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".GamePeg"
+            android:name=".Games.GamePeg"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".Games.DetailActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
     </application>
 

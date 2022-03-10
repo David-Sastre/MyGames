@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.Games;
 
 
 import android.app.AlertDialog;
@@ -15,6 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.my2048game.R;
+import com.example.my2048game.Utils.DBHelper;
+
 import java.util.Random;
 
 public class Game2048 extends AppCompatActivity implements GestureDetector.OnGestureListener {

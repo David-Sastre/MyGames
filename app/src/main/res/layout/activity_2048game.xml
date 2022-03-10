@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
-    tools:context=".Game2048">
+    tools:context=".Games.Game2048">
 
     <TextView
         android:id="@+id/titulo"

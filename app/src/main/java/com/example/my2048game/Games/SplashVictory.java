@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.Games;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.my2048game.R;
 
 public class SplashVictory extends AppCompatActivity {
     private static final int SPLASH_SCREEN = 8500;

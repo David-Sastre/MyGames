@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.Games;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.my2048game.R;
+import com.example.my2048game.User.Settings;
 
 public class MainPegSolitaire extends AppCompatActivity {
     private String username;
@@ -22,8 +25,7 @@ public class MainPegSolitaire extends AppCompatActivity {
         String[] items = {
                 getResources().getString(R.string.menu_item_play),
                 getResources().getString(R.string.menu_item_scores),
-                getResources().getString(R.string.menu_item_settings),
-                getResources().getString(R.string.menu_item_help) };
+                getResources().getString(R.string.menu_item_settings)};
 
         ArrayAdapter<String> adapt = new ArrayAdapter<String>(this,
                 R.layout.style_item, items);
@@ -40,13 +42,6 @@ public class MainPegSolitaire extends AppCompatActivity {
                     startActivity(new Intent(MainPegSolitaire.this,
                             GamePeg.class));
                     finish();
-                } else if (strText.equalsIgnoreCase(getResources().getString(
-                        R.string.menu_item_help))) {
-                    // Launch the Help Activity
-//                    Intent intent = new Intent(MainPegSolitaire.this,
-//                            HelperPeg.class);
-//                    intent.putExtra("user", user);
-//                    startActivity(intent);
                 } else if (strText.equalsIgnoreCase(getResources().getString(
                         R.string.menu_item_settings))) {
                 // Launch the Settings Activity

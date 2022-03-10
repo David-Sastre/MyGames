@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.Games;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.my2048game.R;
+import com.example.my2048game.User.Settings;
 
 public class Main2048 extends AppCompatActivity {
     private String username;
@@ -22,8 +25,7 @@ public class Main2048 extends AppCompatActivity {
         String[] items = {
                 getResources().getString(R.string.menu_item_play),
                 getResources().getString(R.string.menu_item_scores),
-                getResources().getString(R.string.menu_item_settings),
-                getResources().getString(R.string.menu_item_help) };
+                getResources().getString(R.string.menu_item_settings)};
 
         ArrayAdapter<String> adapt = new ArrayAdapter<String>(this,
                 R.layout.style_item, items);
@@ -42,11 +44,6 @@ public class Main2048 extends AppCompatActivity {
                     intent.putExtra("user", username);
                     startActivity(intent);
                     finish();
-                } else if (strText.equalsIgnoreCase(getResources().getString(
-                    R.string.menu_item_help))) {
-                // Launch the Help Activity
-//                startActivity(new Intent(Main2048.this,
-//                        Help2048.class));
                 } else if (strText.equalsIgnoreCase(getResources().getString(
                     R.string.menu_item_settings))) {
                 // Launch the Settings Activity

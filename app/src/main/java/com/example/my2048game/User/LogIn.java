@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.User;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +11,10 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.my2048game.Games.MenuJuegos;
+import com.example.my2048game.R;
+import com.example.my2048game.Utils.DBHelper;
 
 public class LogIn extends AppCompatActivity {
 

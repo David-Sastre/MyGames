@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.User;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,9 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.my2048game.R;
+import com.example.my2048game.Utils.DBHelper;
 
 public class ChangePassword extends AppCompatActivity {
 

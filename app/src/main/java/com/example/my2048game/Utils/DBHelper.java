@@ -1,4 +1,4 @@
-package com.example.my2048game;
+package com.example.my2048game.Utils;
 
 
 
@@ -8,9 +8,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import androidx.annotation.LongDef;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  *
@@ -39,14 +36,6 @@ public class DBHelper extends SQLiteOpenHelper {
                     KEY_USER + " TEXT PRIMARY KEY, " +
                     KEY_PASSWORD + " TEXT );";
 
-//    private static final String TABLE_SCORE_CREATE =
-//            "CREATE TABLE " +
-//                    T_SCORE + " (" +
-//                    KEY_USER + " TEXT FOREIGN KEY (user) REFERENCES Users(user)," +
-//                    KEY_GAME + " TEXT, " +
-//                    KEY_TIME + " TEXT, " +
-//                    KEY_TOTSCORE + " TEXT );";
-
     private SQLiteDatabase mWritableDB;
     private SQLiteDatabase mReadableDB;
 
@@ -56,15 +45,20 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //Ejecutamos las dos tablas y creamos un nuevo usuario admin.
         db.execSQL(TABLE_CREATE);
-//        db.execSQL(TABLE_SCORE_CREATE);
         db.execSQL("CREATE TABLE IF NOT EXISTS Scores ( user TEXT, game TEXT, time TEXT, total_Score TEXT, " +
                 " FOREIGN KEY (user) REFERENCES " +
                 "Users (user) ON DELETE CASCADE);");
         adminDB(db);
     }
 
+    /**
+     * Método para que las foreign keys se activen.(Predeterminado OFF)
+     * @param db
+     */
     @Override
+
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
         if (!db.isReadOnly()) {
@@ -73,6 +67,12 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     *
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(DBHelper.class.getName(),

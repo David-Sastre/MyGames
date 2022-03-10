@@ -1,32 +1,22 @@
-package com.example.my2048game;
+package com.example.my2048game.Games;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.my2048game.R;
+import com.example.my2048game.Utils.DBHelper;
+
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ScoreGames extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
